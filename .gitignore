@@ -94,3 +94,4 @@ ENV/
 # For Security purposes
 config.py
 .idea/*
+data/
