@@ -36,4 +36,27 @@ April #1
 	
 		> Bounding boxes do not act as filters for other filter parameters. For example track=twitter&locations=-122.75,36.8,-121.75,37.8 would match any tweets containing the term Twitter (even non-geo tweets) OR coming from the San Francisco area.
 	
-	
+- **Tue Apr  4 09:42:00 WIB 2017**
+	- 	Preprocessing: remove RT, via, URL, unicode characters (convert to string if possible), remove hastags (or separate hashtags and regular term)?.
+	-  From python to web based graph: https://github.com/wrobstory/vincent
+	-  Discussion about text (document) clustering:
+		-  https://www.researchgate.net/post/What_is_the_best_algorithm_for_Text_Clustering
+		-  http://datascience.stackexchange.com/questions/979/algorithms-for-text-clustering
+		-  Latent Dirichlet Allocation (LDA)
+		-  k-Means
+		-  Latent Semantic Analysis
+		-  Ontology based clustering
+	- DBI implementation in Python (and also other index in text clustering):
+		- http://www.turingfinance.com/clustering-countries-real-gdp-growth-part2/
+	- Visualization options:
+		- No text are presented, possibly only the keywords. When the pointer hovers on a particular point, the full text (tweet) appears.
+	- Interesting bookmarks:
+		- http://scikit-learn.org/stable/auto_examples/text/document_clustering.html
+		- http://blog.echen.me/2011/08/22/introduction-to-latent-dirichlet-allocation/
+		- https://tedunderwood.com/2012/04/07/topic-modeling-made-just-simple-enough/
+		- http://brandonrose.org/clustering
+		- http://www.cs.duke.edu/courses/spring14/compsci290/assignments/lab02.html
+		- http://nlpforhackers.io/recipe-text-clustering/
+		- http://datascience.stackexchange.com/questions/979/algorithms-for-text-clustering
+		- http://harrywang.github.io/document_clustering/
+		- Several indices in clustering: http://www.turingfinance.com/clustering-countries-real-gdp-growth-part2/
