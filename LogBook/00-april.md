@@ -10,6 +10,13 @@ LogBook
 
 April #1
 ---------
+Target this week:
+
+- Working code with visualization
+	- Using preprocessed data from Mas Arham
+	- Using mainstream online media
+- DBI is also counted (as discussed in the meeting).
+
 - **Sun Apr  2 21:41:15 WIB 2017**
 	- Preparing the git repository.
 	- Mining twitter using python:
@@ -46,6 +53,7 @@ April #1
 		-  k-Means
 		-  Latent Semantic Analysis
 		-  Ontology based clustering
+		-  Hierarchical clustering
 	- DBI implementation in Python (and also other index in text clustering):
 		- http://www.turingfinance.com/clustering-countries-real-gdp-growth-part2/
 	- Visualization options:
@@ -54,9 +62,11 @@ April #1
 		- http://scikit-learn.org/stable/auto_examples/text/document_clustering.html
 		- http://blog.echen.me/2011/08/22/introduction-to-latent-dirichlet-allocation/
 		- https://tedunderwood.com/2012/04/07/topic-modeling-made-just-simple-enough/
-		- http://brandonrose.org/clustering
+		- **Simply comprehensive** http://brandonrose.org/clustering
+		- http://brandonrose.org/top100
 		- http://www.cs.duke.edu/courses/spring14/compsci290/assignments/lab02.html
 		- http://nlpforhackers.io/recipe-text-clustering/
 		- http://datascience.stackexchange.com/questions/979/algorithms-for-text-clustering
 		- http://harrywang.github.io/document_clustering/
 		- Several indices in clustering: http://www.turingfinance.com/clustering-countries-real-gdp-growth-part2/
+	- Visualize the performance of the clustering as well.
