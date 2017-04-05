@@ -70,3 +70,8 @@ Target this week:
 		- http://harrywang.github.io/document_clustering/
 		- Several indices in clustering: http://www.turingfinance.com/clustering-countries-real-gdp-growth-part2/
 	- Visualize the performance of the clustering as well.
+- **Wed Apr  5 10:30:58 WIB 2017**
+	- Location based crawling of Twitter data using native Twitter's Python library requires a point and radius.
+	- Tutorial on using data frame in Python (pandas)
+		- https://www.datacamp.com/community/tutorials/pandas-tutorial-dataframe-python#gs.6Yqsa1k
+	- Trying to make http://brandonrose.org/clustering works.

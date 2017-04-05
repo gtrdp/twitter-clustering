@@ -94,3 +94,5 @@ if __name__ == '__main__':
 	# twitter_stream.filter(track=[args.query]) # filter by query
 	JOGJA = [109.4763, -8.4557, 111.3928, -7.2811] # jogja geobox
 	twitter_stream.filter(locations=JOGJA) # filter by location
+
+	format
