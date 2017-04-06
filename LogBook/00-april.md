@@ -70,8 +70,23 @@ Target this week:
 		- http://harrywang.github.io/document_clustering/
 		- Several indices in clustering: http://www.turingfinance.com/clustering-countries-real-gdp-growth-part2/
 	- Visualize the performance of the clustering as well.
+
 - **Wed Apr  5 10:30:58 WIB 2017**
 	- Location based crawling of Twitter data using native Twitter's Python library requires a point and radius.
 	- Tutorial on using data frame in Python (pandas)
 		- https://www.datacamp.com/community/tutorials/pandas-tutorial-dataframe-python#gs.6Yqsa1k
-	- Trying to make http://brandonrose.org/clustering works.
+	- Trying to make http://brandonrose.org/clustering works (took most of the time).
+		- The program ran until clustering, got a problem on visualization.
+		- The MDS process took hours of running time. Very long list length might cause the problem.
+
+- **Thu Apr  6 08:48:57 WIB 2017**
+	- Continue making the brandon's code works.
+		- Tested using 1000 samples: works fine.
+		- Tested using 2000 samples: works fine, took a couple of minutes.
+	- Indonesian popular online news RSS:
+		- http://monosbit.blogspot.co.id/2015/08/daftar-rss-feed-website-populer.html
+	- **Question:** clustering result always changes?
+	- Got the first working clustering with visualization. Problems:
+		- Some words appear more than once.
+		- The legend of the graph overlaps the main cluster image.
+	
