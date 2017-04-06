@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""clustering-kmeans.py: Tweet clustering using kmeans."""
+"""clustering-kmeans.py: Tweet clustering using kmeans. Inspired from http://brandonrose.org/clustering#K-means-clustering"""
 from __future__ import print_function
 __author__ = "Guntur DP"
 __email__ = "guntur.dharma@gmail.com"
@@ -8,37 +8,39 @@ __status__ = "Development"
 
 
 import pandas as pd
-import numpy as np
-import pandas as pd
 import nltk
 import re
-import os
-import codecs
-from sklearn import feature_extraction
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.cluster import KMeans
 from sklearn.externals import joblib
 from nltk.stem.snowball import SnowballStemmer
 import mpld3
-import os  # for os.path.basename
-
 import matplotlib.pyplot as plt
-import matplotlib as mpl
-
 from sklearn.manifold import MDS
+import feedparser
 
 
 # read the data, preprocessing involves:
 # - removing URLS, special characters
 # - all to small letters
-raw_data = pd.read_csv('data.csv')
-# replace URL
-raw_data = raw_data.replace(['http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', "&amp;", "\[pic\]"], ['','',''], regex=True)
-users_long = raw_data['user'].tolist()
-texts_long = [x.lower() for x in raw_data['text'].tolist()]
-users = users_long[:2000]
-texts = texts_long[:2000]
+# read from precrawled twitter tweets
+# raw_data = pd.read_csv('data.csv')
+# # replace URL
+# raw_data = raw_data.replace(['http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', "&amp;", "\[pic\]"], ['','',''], regex=True)
+# users_long = raw_data['user'].tolist()
+# texts_long = [x.lower() for x in raw_data['text'].tolist()]
+# users = users_long[:2000]
+# texts = texts_long[:2000]
+
+# read from tempo.co rss
+tempo_data = feedparser.parse('tempo.xml')
+
+users = []
+texts = []
+for value in tempo_data['entries']:
+	users.append(value['title'])
+	texts.append(value['summary'])
 
 # Stopwords, stemming, and tokenizing
 stopwords_english = nltk.corpus.stopwords.words('english')
@@ -85,9 +87,9 @@ print('there are ' + str(vocab_frame.shape[0]) + ' items in vocab_frame')
 
 # tfidf
 # define vectorizer parameters (tuning parameters)
-tfidf_vectorizer = TfidfVectorizer(max_df=0.8, max_features=200000,
-								   min_df=10, stop_words=stopwords_english + stopwords_indonesian,
-								   use_idf=True, ngram_range=(1, 2))
+tfidf_vectorizer = TfidfVectorizer(max_df=0.5, max_features=200000,
+								   min_df=2, stop_words=stopwords_english + stopwords_indonesian,
+								   use_idf=False, ngram_range=(1, 2))
 
 tfidf_matrix = tfidf_vectorizer.fit_transform(texts)  # fit the vectorizer
 # print(tfidf_matrix.shape)
@@ -197,7 +199,7 @@ class TopToolbar(mpld3.plugins.PluginBase):
 
 
 # create data frame that has the result of the MDS plus the cluster numbers and titles
-df = pd.DataFrame(dict(x=xs, y=ys, label=clusters, tweet=texts))
+df = pd.DataFrame(dict(x=xs, y=ys, label=clusters, tweet=users))
 
 # group by cluster
 groups = df.groupby('label')
