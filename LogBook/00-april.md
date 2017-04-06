@@ -89,4 +89,9 @@ Target this week:
 	- Got the first working clustering with visualization. Problems:
 		- Some words appear more than once.
 		- The legend of the graph overlaps the main cluster image.
-	
+	- When visualizing make sure the centroids are also drawn.
+	- More k-Means clustering implementation in python (including visualizing it):
+		- http://www.dummies.com/programming/big-data/data-science/how-to-visualize-the-clusters-in-a-k-means-unsupervised-learning-model/
+		- http://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_digits.html
+		- http://fromdatawithlove.thegovans.us/2013/05/clustering-using-scikit-learn.html
+		- http://datascience.stackexchange.com/questions/6809/how-to-plot-visualize-clusters-in-scikit-learn-sklearn
