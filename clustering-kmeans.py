@@ -89,15 +89,14 @@ print('there are ' + str(vocab_frame.shape[0]) + ' items in vocab_frame')
 # define vectorizer parameters (tuning parameters)
 tfidf_vectorizer = TfidfVectorizer(max_df=0.5, max_features=200000,
 								   min_df=2, stop_words=stopwords_english + stopwords_indonesian,
-								   use_idf=False, ngram_range=(1, 2))
+								   use_idf=True, ngram_range=(1, 2))
 
 tfidf_matrix = tfidf_vectorizer.fit_transform(texts)  # fit the vectorizer
-# print(tfidf_matrix.shape)
 terms = tfidf_vectorizer.get_feature_names()
 dist = 1 - cosine_similarity(tfidf_matrix)
-# print(terms)
-# print(tfidf_matrix)
-
+print(len(terms))
+print(tfidf_matrix.shape)
+print(len(dist[0]))
 
 # k-means clustering
 num_clusters = 5

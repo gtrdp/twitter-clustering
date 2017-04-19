@@ -23,3 +23,13 @@ Meeting NLP
 - Text stemmer Bahasa Indonesia:
 	- http://blog.pantaw.com/syntatic-proses-text-stemmer-bahasa-indonesia-dengan-python/
 
+**Thu Apr  6 16:08:19 WIB 2017**
+
+- Clustering still needs stemming and stopwords removal.
+- Retweet -> to see influential tweet.
+- Some options of visualization:
+	- https://plot.ly 
+	- https://d3js.org
+	- https://www.elastic.co/products/kibana
+	- https://www.elastic.co
+- The higher the dbi the more crowded the cluster is.

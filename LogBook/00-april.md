@@ -4,9 +4,8 @@ LogBook
 
 **To-Do**
 
-- Learn DBI
-- TF IDF
-- Learn how to visualize the data from Google Trends
+- How to visualize: voronoi tree map, cartesian plot
+- Different clustering algorithms: hierarchical clustering (top-down, bottom-up), partitional clustering (centroid-based, density-based)
 
 April #1
 ---------
@@ -89,4 +88,80 @@ Target this week:
 	- Got the first working clustering with visualization. Problems:
 		- Some words appear more than once.
 		- The legend of the graph overlaps the main cluster image.
+	- Progress report meeting.
+
+- **Fri Apr  7 15:58:47 WIB 2017**
+	- Writing PPTI proposal.
+		- Kerjasama skema konsorsium ABG (Lembaga Akademik/ Perguruan Tinggi/ Lembaga Litbang, Business dan Government). Diutamakan adanya kerjasama terkait pengadaan pemerintah (produk/ komponen).
+		- Road Map 3 Tahun	
+	- Output:
+		- Prototipe laik industri
+		- Dokumen Detail Engineering Design dari prototype laik industri yang dibuat
+		- Dokumen hasil uji simulasi prototipe laik industri di laboratorium dengan kondisi sesungguhnya
+		- Dokumen hasil uji Prototype laik industri yang sudah mengalami pengujian dalam lingkungan yang sesungguhnya.
+	- Outcome:
+		- Peningkatan TKDN
+		- Peningkatan daya kompetisi industri
+		- Adanya produk hasil pengembangan industri
+		- Mengurangi ketergantungan teknologi dari luar
+		- Penghematan devisa dan peningkatan devisa
+
+April #2
+--------
+- **Mon Apr 10 08:44:49 WIB 2017**
+	- Writing proposal.
+	- To do:
+		- BAB 2: Komparasi Sebutkan software analisis yang sudah tersedia: elastic search, kibana, dll Bandingkan dengan komparasi komparasi produk lain, sebutkan keunggulan (berikan chapter khusus dengan poin poin). Bandingkan dengan paten juga https://www.nodeflux.io/about
+		- BAB 6: Seperti yang ada pada proposal SUVI, dengan pembagian seperti di buku panduan
+WBS: Analisis Sentimen, Clustering, Visualisasi, Integrasi
+WP: menyesuaikan
+		- BAB 8: 3 tahun, samakan dengan suvi
+		- Sharing pembiayaan: Dijabarkan dalam tabel per tahun
+	- Keywords for transjakarta research (with PT Aino): lokasi, orang, ketidak nyamanan transjakarta
+
+- **Tue Apr 11 09:43:04 WIB 2017**
+	- Revising proposal.
+
+- **Wed Apr 12 08:56:50 WIB 2017**
+	- Nice tool for text clustering (including visualization):
+		- https://carrotsearch.com
+	- Voronoi treemap visualization: good way to visualize the result.
+
+- **Thu Apr 13 11:30:38 WIB 2017**
+	- Teknologi peranti lunak yang memungkinkan para pemangku jabatan di pemerintahan untuk mengetahui isu-isu terkini dari sosial media dan sentimennya, guna bahan pertimbangan obyektif dalam mengambil kebijakan strategis.
+	- Informasi teknis proposal:
+		- NIDN: 0020096904
+		- No TKT PPTI: 3029967576
+		- No Reg Proposal: 277466
 	
+- **Fri Apr 14 07:49:52 WIB 2017**
+	- Good Friday.
+
+April #3
+--------
+- **Mon Apr 17 07:49:52 WIB 2017**
+	- Visualizing document clustering using scatter plot:
+		- http://stats.stackexchange.com/questions/49313/r-visualizing-document-clustering-results
+		- if you are trying to validate your results in some way, consider graphing cluster metrics such as cohesion and separation, or a silhouette plot
+	- Silhouette plot to see the cluster performance.
+		- https://en.wikipedia.org/wiki/Silhouette_(clustering)
+		- https://de.wikipedia.org/wiki/Silhouettenkoeffizient
+	- Find out what do these coefficients mean:
+		- Homogeneity: 0.537
+		- Completeness: 0.597
+		- V-measure: 0.565
+		- Adjusted Rand-Index: 0.519
+		- Silhouette Coefficient: 0.008
+	- Learning how the code works.
+	- Silhouette analysis on python:
+		- http://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html
+		- https://stats.stackexchange.com/questions/10540/how-to-interpret-mean-of-silhouette-plot
+
+- **Tue Apr 18 12:53:38 WIB 2017**
+	- Meeting Big Data Project.
+
+- **Wed Apr 19 06:29:20 WIB 2017**
+	- Graduation Day.
+	
+- **Thu Apr 20 06:29:20 WIB 2017**
+	- Silhouette Analysis.
