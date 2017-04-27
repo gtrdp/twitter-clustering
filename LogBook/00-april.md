@@ -172,3 +172,25 @@ April #3
 	
 - **Thu Apr 20 06:29:20 WIB 2017**
 	- Silhouette Analysis.
+	- Lunch meeting for progress report.
+	
+- **Fri Apr 21 14:10:42 WIB 2017**
+	- None (working on SKK Migas all day long).
+
+April #4
+--------
+- **Mon Apr 24 14:10:42 WIB 2017**
+	- Ascension of Prophet Muhammad PBUH.
+
+- **Tue Apr 25 14:10:42 WIB 2017**
+	- Sister's physician inauguration.
+	
+- **Wed Apr 26 14:10:42 WIB 2017**
+	- Got the mining social media with python book from Misbach.
+	- Learning how PCA works and how to visualize data:
+		- http://sebastianraschka.com/Articles/2014_pca_step_by_step.html (step by step implementation in Python)
+		- http://www.dummies.com/programming/big-data/data-science/how-to-visualize-the-clusters-in-a-k-means-unsupervised-learning-model/ (easily understandable pca)
+	- Try to work with small datasets to see what is really happpened.
+
+- **Thu Apr 27 09:51:45 WIB 2017**
+	- 

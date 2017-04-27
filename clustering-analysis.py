@@ -1,0 +1,184 @@
+#!/usr/bin/env python
+
+"""clustering-analysis.py: """
+from __future__ import print_function
+__author__ = "Guntur DP"
+__email__ = "guntur.dharma@gmail.com"
+__status__ = "Development"
+
+import pandas as pd
+import nltk
+import re
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.cluster import KMeans
+from sklearn.externals import joblib
+from nltk.stem.snowball import SnowballStemmer
+import mpld3
+import matplotlib.pyplot as plt
+from sklearn.manifold import MDS
+import feedparser
+from sklearn.metrics import silhouette_samples, silhouette_score
+import Similarity
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+
+def cluster(num_clusters):
+	# === k-means clustering
+	print("clustering with N=%d" % num_clusters)
+	km = KMeans(n_clusters=num_clusters, random_state=10)
+	km.fit(tfidf_matrix)
+	clusters = km.labels_.tolist()
+
+	# store the clustering result
+	# joblib.dump(km,  'doc_cluster.pkl')
+	# load the clustering result
+	# km = joblib.load('doc_cluster.pkl')
+	# clusters = km.labels_.tolist()
+
+	# creating data frame to store the files
+	tweets = {'user': users, 'text': texts, 'cluster': clusters}
+	clustered_data = pd.DataFrame(tweets, index = [clusters] , columns = ['user', 'text', 'cluster'])
+	# print(clustered_data['cluster'].value_counts())
+
+
+
+	# finding the top n words of each cluster
+	print("Top terms per cluster:")
+	print()
+	# sort cluster centers by proximity to centroid
+	order_centroids = km.cluster_centers_.argsort()[:, ::-1]
+
+	cluster_names = {}
+
+	for i in range(num_clusters):
+		print("Cluster %d words:" % i)
+
+		foo = ''
+		for ind in order_centroids[i, :7]:
+			# print(' %s' % vocab_frame.ix[terms[ind].split(' ')].values.tolist()[0][0].encode('utf-8', 'ignore'), end=',')
+			print(' %s' % terms[ind], end=',')
+			foo = foo + terms[ind] + ', '
+		print()  # add whitespace
+		print()  # add whitespace
+		cluster_names[i] = foo
+
+		# print("Cluster %d titles:" % i, end='')
+		# for title in clustered_data.ix[i]['text'].values.tolist():
+		# 	print(' %s,' % title, end='')
+		# print()  # add whitespace
+		# print()  # add whitespace
+
+	silhouette_avg = silhouette_score(tfidf_matrix, clusters)
+	print("For n_clusters =", num_clusters,
+		  "The average silhouette_score is :", silhouette_avg)
+	silhouette_index.append(silhouette_avg)
+	print()
+	# print()
+
+if __name__ == "__main__":
+	# read the data, preprocessing involves:
+	# - removing URLS, special characters
+	# - all to small letters
+	# read from precrawled twitter tweets
+	print("reading the files, stemming, and stopwords removal")
+	raw_data = pd.read_csv('data.csv')
+	# replace URL
+	raw_data = raw_data.replace(
+		['http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', "&amp;", "\[pic\]"],
+		['', '', ''], regex=True)
+	users_long = raw_data['user'].tolist()
+	texts_long = [x.lower() for x in raw_data['text'].tolist()]
+	users = users_long
+	texts = texts_long
+
+	# # read from tempo.co rss
+	# tempo_data = feedparser.parse('tempo.xml')
+	#
+	# users = []
+	# texts = []
+	# for value in tempo_data['entries']:
+	# 	users.append(value['title'])
+	# 	texts.append(value['summary'])
+
+	# Stopwords, stemming, and tokenizing
+	stopwords_english = nltk.corpus.stopwords.words('english')
+	with open("stopword_list_tala.txt", "r") as f:
+		stopwords_indonesian = f.read().splitlines()
+	stemmer = SnowballStemmer("english")
+
+
+	def tokenize_and_stem(text):
+		# first tokenize by sentence, then by word to ensure that punctuation is caught as it's own token
+		tokens = [word for sent in nltk.sent_tokenize(text) for word in nltk.word_tokenize(sent)]
+		filtered_tokens = []
+		# filter out any tokens not containing letters (e.g., numeric tokens, raw punctuation)
+		for token in tokens:
+			if re.search('[a-zA-Z]', token):
+				filtered_tokens.append(token)
+		stems = [stemmer.stem(t) for t in filtered_tokens]
+		return stems
+
+
+	def tokenize_only(text):
+		# first tokenize by sentence, then by word to ensure that punctuation is caught as it's own token
+		tokens = [word.lower() for sent in nltk.sent_tokenize(text) for word in nltk.word_tokenize(sent)]
+		filtered_tokens = []
+		# filter out any tokens not containing letters (e.g., numeric tokens, raw punctuation)
+		for token in tokens:
+			if re.search('[a-zA-Z]', token):
+				filtered_tokens.append(token)
+		return filtered_tokens
+
+
+	totalvocab_stemmed = []
+	totalvocab_tokenized = []
+	for i in texts:
+		allwords_stemmed = tokenize_and_stem(i)  # for each item in 'synopses', tokenize/stem
+		totalvocab_stemmed.extend(allwords_stemmed)  # extend the 'totalvocab_stemmed' list
+
+		allwords_tokenized = tokenize_only(i)
+		totalvocab_tokenized.extend(allwords_tokenized)
+
+	vocab_frame = pd.DataFrame({'words': totalvocab_tokenized}, index=totalvocab_stemmed)
+	# print('there are ' + str(vocab_frame.shape[0]) + ' items in vocab_frame')
+	# vocab_frame.to_csv('vocab_frame.csv')
+
+
+
+	# tfidf
+	# define vectorizer parameters (tuning parameters)
+	print("TFIDF Vectorizer")
+	tfidf_vectorizer = TfidfVectorizer(max_df=0.5, max_features=10000,
+									   min_df=2, stop_words=stopwords_english + stopwords_indonesian,
+									   use_idf=True)
+
+	tfidf_matrix = tfidf_vectorizer.fit_transform(texts)  # fit the vectorizer
+	terms = tfidf_vectorizer.get_feature_names()
+	dist = 1 - cosine_similarity(tfidf_matrix)
+	# print(len(terms))
+	print(tfidf_matrix.shape)
+	# print(len(dist[0]))
+
+	# doing PCA
+	print("performing PCA...")
+	reduced_data = PCA(n_components=2).fit_transform(tfidf_matrix.toarray())
+	# draw the plot
+	plt.scatter(reduced_data[:,0], reduced_data[:,1])
+	# plt.axis([0, 6, 0, 20])
+	plt.show()
+
+
+	# print("beginning clustering...")
+	# n_clusters = [2]
+	# silhouette_index = []
+	# for n_clusters in n_clusters:
+	# 	cluster(n_clusters)
+	#
+	# # draw the plot
+	# plt.plot(range, silhouette_index, 'ro', linestyle="-", color='b')
+	# # plt.axis([0, 6, 0, 20])
+	# plt.xlabel('n cluster')
+	# plt.ylabel('Silhouette')
+	# plt.title('Silhouette index on Twitter Jogja Mas Arham dataset')
+	# plt.show()
