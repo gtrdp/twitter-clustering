@@ -1,6 +1,7 @@
 LogBook
 -------
-- [April](https://github.com/gtrdp/masters-thesis-guntur/blob/master/LogBook/00-august.md)
+- [April](https://github.com/gtrdp/twitter-clustering/blob/master/LogBook/00-april.md)
+- [May](https://github.com/gtrdp/twitter-clustering/blob/master/LogBook/01-may.md)
 
 **To-Do**
 
@@ -193,4 +194,22 @@ April #4
 	- Try to work with small datasets to see what is really happpened.
 
 - **Thu Apr 27 09:51:45 WIB 2017**
-	- 
+	- Playing with PCA and silhouette index.
+	- FoamTree visualization is one of a good visualization technique.
+		- http://search.carrotsearch.com/carrot2-webapp/search?query=jakarta&results=100&source=etools&algorithm=lingo3g&view=foamtree&skin=fancy-compact&EToolsDocumentSource.language=ALL&EToolsDocumentSource.country=ALL&EToolsDocumentSource.safeSearch=false
+	- Progress report meeting. Next step:
+		- Use small subset of data (from mas arham dataset (with sentiment)).
+		- Try other clustering algorithm: hierarchical, etc.
+		- Start to think about the visualization: voronoi map like foamtree.
+	- FoamTree API: http://get.carrotsearch.com/foamtree/demo/
+	- Other visualization possibility: Bubble chart
+		- https://github.com/d3/d3/wiki/Gallery
+
+- **Fri Apr 28 10:03:22 WIB 2017**
+	- iSys weekly meeting.
+		- cara mengatasi panjang vs p, singkatan dll
+		- MAE itu mengartikannya gimana ya?
+		- meningkat?
+		- pembatasan jumlah kata?
+		- ANOVA?
+
