@@ -756,3 +756,6 @@ yaitu
 yakin
 yakni
 yang
+others
+yg
+ya

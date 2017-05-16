@@ -94,3 +94,7 @@ May #3
 
 - **Tue May 16 13:49:15 WIB 2017**
 	- Continuing working on statistical analysis.
+	- Nice bubble chart example:
+		- https://bl.ocks.org/mbostock/4063269
+		- https://bl.ocks.org/mbostock/07ec62d9957a29a30e71cad962ff2efd
+	- Statistical is now working. ToDo: repair the text appearance (new line).

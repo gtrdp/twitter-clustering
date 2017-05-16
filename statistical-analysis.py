@@ -2,18 +2,34 @@ from __future__ import print_function
 import nltk
 from sklearn.feature_extraction.text import CountVectorizer
 import feedparser
+import pandas as pd
 import numpy as np
 import scipy
 import operator
+import csv
+import unicodedata
 
-# read from tempo.co rss
-tempo_data = feedparser.parse('tempo.xml')
 
-users = []
-texts = []
-for value in tempo_data['entries']:
-	users.append(value['title'])
-	texts.append(value['summary'])
+# read the data, preprocessing involves:
+# read from precrawled twitter tweets
+print("reading the files, stemming, and stopwords removal")
+raw_data = pd.read_csv('data.csv')
+# replace URL
+raw_data = raw_data.replace(
+	['http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', "&amp;", "\[pic\]"],
+	['', '', ''], regex=True)
+users_long = raw_data['user'].tolist()
+texts_long = [x.lower() for x in raw_data['text'].tolist()]
+users = users_long
+texts = texts_long
+
+# # read from tempo.co rss
+# tempo_data = feedparser.parse('tempo.xml')
+# users = []
+# texts = []
+# for value in tempo_data['entries']:
+# 	users.append(value['title'])
+# 	texts.append(value['summary'])
 # =============== end reading data =========================
 
 
@@ -46,3 +62,11 @@ for document_index, word_index, value in zip(cx.row, cx.col, cx.data):
 
 words_dictionary = sorted(words_dictionary.items(), key = operator.itemgetter(1), reverse = True)
 print(words_dictionary)
+
+# write to csv file for visualization
+with open('result.csv', 'wb') as csv_file:
+	writer = csv.writer(csv_file)
+	writer.writerow(["terms", "value"])
+	for key, value in words_dictionary:
+		key = unicodedata.normalize('NFKD', key).encode('ascii', 'ignore')
+		writer.writerow([key, value])
