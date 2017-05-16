@@ -22,12 +22,15 @@ from sklearn.metrics import silhouette_samples, silhouette_score
 import Similarity
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
+import csv
+import unicodedata
 
 def cluster(num_clusters):
 	# === k-means clustering
 	print("clustering with N=%d" % num_clusters)
 	km = KMeans(n_clusters=num_clusters, random_state=10)
 	km.fit(tfidf_matrix)
+	# km.fit(reduced_data)
 	clusters = km.labels_.tolist()
 
 	# store the clustering result
@@ -36,11 +39,24 @@ def cluster(num_clusters):
 	# km = joblib.load('doc_cluster.pkl')
 	# clusters = km.labels_.tolist()
 
+
 	# creating data frame to store the files
-	tweets = {'user': users, 'text': texts, 'cluster': clusters}
-	clustered_data = pd.DataFrame(tweets, index = [clusters] , columns = ['user', 'text', 'cluster'])
+	# tweets = {'user': users, 'text': texts, 'cluster': clusters}
+	# clustered_data = pd.DataFrame(tweets, index = [clusters] , columns = ['user', 'text', 'cluster'])
 	# print(clustered_data['cluster'].value_counts())
 
+	# if num_clusters == 3:
+	# 	# plotting the result
+	# 	print("plotting the result to scatter plot")
+	# 	for index, val in enumerate(clusters):
+	# 		if val == 0:
+	# 			c1 = plt.scatter(reduced_data[index, 0], reduced_data[index, 1], c='r', marker='+')
+	# 		elif val == 1:
+	# 			c2 = plt.scatter(reduced_data[index, 0], reduced_data[index, 1], c='g', marker='o')
+	# 		elif val == 2:
+	# 			c3 = plt.scatter(reduced_data[index, 0], reduced_data[index, 1], c='b', marker='*')
+	#
+	# 	plt.show()
 
 
 	# finding the top n words of each cluster
@@ -55,7 +71,7 @@ def cluster(num_clusters):
 		print("Cluster %d words:" % i)
 
 		foo = ''
-		for ind in order_centroids[i, :7]:
+		for ind in order_centroids[i, :3]:
 			# print(' %s' % vocab_frame.ix[terms[ind].split(' ')].values.tolist()[0][0].encode('utf-8', 'ignore'), end=',')
 			print(' %s' % terms[ind], end=',')
 			foo = foo + terms[ind] + ', '
@@ -69,6 +85,7 @@ def cluster(num_clusters):
 		# print()  # add whitespace
 		# print()  # add whitespace
 
+	# silhouette_avg = silhouette_score(reduced_data, clusters)
 	silhouette_avg = silhouette_score(tfidf_matrix, clusters)
 	print("For n_clusters =", num_clusters,
 		  "The average silhouette_score is :", silhouette_avg)
@@ -76,30 +93,46 @@ def cluster(num_clusters):
 	print()
 	# print()
 
+	print("Save the result to csv file")
+	# convert unicode to ascii
+	for idx, val in enumerate(texts):
+		if isinstance(val, unicode):
+			texts[idx] = unicodedata.normalize('NFKD', val).encode('ascii', 'ignore')
+
+	my_dict = {"cluster": clusters, "summary": texts}
+
+	with open('mycsvfile_'+str(num_clusters)+'.csv', 'wb') as f:  # Just use 'w' mode in 3.x
+		writer = csv.writer(f)
+		writer.writerow(my_dict.keys())
+		writer.writerows(zip(*my_dict.values()))
+
 if __name__ == "__main__":
 	# read the data, preprocessing involves:
 	# - removing URLS, special characters
 	# - all to small letters
 	# read from precrawled twitter tweets
 	print("reading the files, stemming, and stopwords removal")
-	raw_data = pd.read_csv('data.csv')
-	# replace URL
-	raw_data = raw_data.replace(
-		['http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', "&amp;", "\[pic\]"],
-		['', '', ''], regex=True)
-	users_long = raw_data['user'].tolist()
-	texts_long = [x.lower() for x in raw_data['text'].tolist()]
-	users = users_long
-	texts = texts_long
+	# raw_data = pd.read_csv('output.csv')
+	# # replace URL
+	# raw_data = raw_data.replace(
+	# 	['http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', "&amp;", "\[pic\]"],
+	# 	['', '', ''], regex=True)
+	# users_long = raw_data['user'].tolist()
+	# texts_long = [x.lower() for x in raw_data['text'].tolist()]
+	# users = users_long
+	# texts = texts_long
 
-	# # read from tempo.co rss
-	# tempo_data = feedparser.parse('tempo.xml')
-	#
-	# users = []
-	# texts = []
-	# for value in tempo_data['entries']:
-	# 	users.append(value['title'])
-	# 	texts.append(value['summary'])
+
+	# read from tempo.co rss
+	tempo_data = feedparser.parse('tempo.xml')
+
+	users = []
+	texts = []
+	for value in tempo_data['entries']:
+		users.append(value['title'])
+		texts.append(value['summary'])
+
+	# =============== end reading data =========================
 
 	# Stopwords, stemming, and tokenizing
 	stopwords_english = nltk.corpus.stopwords.words('english')
@@ -144,7 +177,7 @@ if __name__ == "__main__":
 	# print('there are ' + str(vocab_frame.shape[0]) + ' items in vocab_frame')
 	# vocab_frame.to_csv('vocab_frame.csv')
 
-
+	# ========================= end stopwords, stemming, tokenize ==========================================
 
 	# tfidf
 	# define vectorizer parameters (tuning parameters)
@@ -152,6 +185,10 @@ if __name__ == "__main__":
 	tfidf_vectorizer = TfidfVectorizer(max_df=0.5, max_features=10000,
 									   min_df=2, stop_words=stopwords_english + stopwords_indonesian,
 									   use_idf=True)
+	# uni-gram bi-gram tri-gram: separated and compare the result
+	# kcm and fcm clustering
+	# using dbi
+	# jaccard and cosine similarity
 
 	tfidf_matrix = tfidf_vectorizer.fit_transform(texts)  # fit the vectorizer
 	terms = tfidf_vectorizer.get_feature_names()
@@ -160,25 +197,26 @@ if __name__ == "__main__":
 	print(tfidf_matrix.shape)
 	# print(len(dist[0]))
 
-	# doing PCA
-	print("performing PCA...")
-	reduced_data = PCA(n_components=2).fit_transform(tfidf_matrix.toarray())
-	# draw the plot
-	plt.scatter(reduced_data[:,0], reduced_data[:,1])
-	# plt.axis([0, 6, 0, 20])
-	plt.show()
-
-
-	# print("beginning clustering...")
-	# n_clusters = [2]
-	# silhouette_index = []
-	# for n_clusters in n_clusters:
-	# 	cluster(n_clusters)
-	#
+	# # doing PCA
+	# print("performing PCA...")
+	# reduced_data = PCA(n_components=2).fit_transform(tfidf_matrix.toarray())
 	# # draw the plot
-	# plt.plot(range, silhouette_index, 'ro', linestyle="-", color='b')
-	# # plt.axis([0, 6, 0, 20])
-	# plt.xlabel('n cluster')
-	# plt.ylabel('Silhouette')
-	# plt.title('Silhouette index on Twitter Jogja Mas Arham dataset')
+	# plt.scatter(reduced_data[:,0], reduced_data[:,1])
 	# plt.show()
+
+
+	print("beginning clustering...")
+	n_clusters = [3,26]
+	silhouette_index = []
+	for foo in n_clusters:
+		cluster(foo)
+
+	# draw the plot
+	print(len(n_clusters), len(silhouette_index))
+	plt.plot(n_clusters, silhouette_index, 'ro', linestyle="-", color='b')
+	# plt.axis([0, 6, 0, 20])
+	plt.xlabel('n cluster')
+	plt.ylabel('Silhouette')
+	plt.title('Silhouette index on Tempo.co dataset')
+	# plt.title('Silhouette index on Twitter dataset (with sentiment)')
+	plt.show()

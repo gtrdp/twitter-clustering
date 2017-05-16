@@ -1,7 +1,22 @@
 LogBook
--------
+=======
 - [April](https://github.com/gtrdp/twitter-clustering/blob/master/LogBook/00-april.md)
 - [May](https://github.com/gtrdp/twitter-clustering/blob/master/LogBook/01-may.md)
+
+Algorithm Check List
+--------------------
+| Algorithm |     Done    |  Remarks  |
+|---------|-----------|---------|
+| k-Means | Done        | Using bi gram; evaluated using silhouette analysis |
+| Hierarchical  |         |           |
+| Partitional Clustering |        |           |
+| Statistical Analysis |        |           |
+
+Parameters:
+
+- TF-IDF n-gram: 2-gram, 3-gram, etc.
+- Using DBI and Silhouette
+- Jaccard and cosine similarity
 
 **To-Do**
 
@@ -55,5 +70,27 @@ May #2
 		- sampai mana progress saat ini? preliminary research? sudah ada Big data WG->transjakarta, NLP->twitter
 		- seberapa banyak data yang sudah dikumpulkan? 50MB twitter 
 		- berapa lama proses komputasi yang digunakan? karena data sosial media dari Indonesia sangat besar
+	- hasil kepo singkat Pak Novan:
+		- reviewer 1 Ir. Djoko Agung Harijadi, M.M.. Sekretaris Ditjen Aplikasi Informatika
+		- reviewer 2. Ir Lolly Amalia Abdullah, MSc,  Direktur Kerjasama dan Fasilitasi Kemenparekraf
+		- reviewer 3. Dr. Media Anugerah Ayu, M. Sc. , dari Ilkom Sampurna University
 		
 - **Wed May 10 14:48:50 WIB 2017**
+	- Collections of graph in d3.js: https://github.com/d3/d3/wiki/Gallery
+
+- **Thu May 11 19:46:40 WIB 2017**
+	- Waisak Day.
+
+- **Fri May 12 14:33:25 WIB 2017**
+	- None (SKK Migas).
+
+May #3
+------
+- **Mon May 15 10:20:03 WIB 2017**
+	- Finding important words: http://www.markhneedham.com/blog/2015/02/15/pythonscikit-learn-calculating-tfidf-on-how-i-met-your-mother-transcripts/
+	- Word cloud in Python:
+		- http://peekaboo-vision.blogspot.co.id/2012/11/a-wordcloud-in-python.html
+		- https://github.com/amueller/word_cloud
+
+- **Tue May 16 13:49:15 WIB 2017**
+	- Continuing working on statistical analysis.
