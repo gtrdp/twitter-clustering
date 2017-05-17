@@ -13,7 +13,14 @@
 #    writer.writerow(my_dict.keys())
 #    writer.writerows(zip(*d.values()))
 
-import operator
-x = {1: 2, 3: 4, 4: 3, 2: 1, 0: 0}
-sorted_x = sorted(x.items(), key=operator.itemgetter(1))
-print(dict(sorted_x))
+# import operator
+# x = {1: 2, 3: 4, 4: 3, 2: 1, 0: 0}
+# sorted_x = sorted(x.items(), key=operator.itemgetter(1))
+# print(dict(sorted_x))
+
+import json
+with open('data/Hasil.json', 'r') as f:
+	for line in f:
+		tweet = json.loads(line)
+		# tokens = preprocess(str(tweet['text']))
+		print(tweet['text'])

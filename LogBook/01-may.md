@@ -8,9 +8,10 @@ Algorithm Check List
 | Algorithm |     Done    |  Remarks  |
 |---------|-----------|---------|
 | k-Means | Done        | Using bi gram; evaluated using silhouette analysis |
-| Hierarchical  |         |           |
-| Partitional Clustering |        |           |
-| Statistical Analysis |        |           |
+| Statistical Analysis | Done | Visualization is not yet done. |
+| Ward hierarchical clustering  |         |           |
+| DBSCAN |        |           |
+
 
 Parameters:
 
@@ -98,3 +99,9 @@ May #3
 		- https://bl.ocks.org/mbostock/4063269
 		- https://bl.ocks.org/mbostock/07ec62d9957a29a30e71cad962ff2efd
 	- Statistical is now working. ToDo: repair the text appearance (new line).
+
+- **Wed May 17 10:26:39 WIB 2017**
+	- Clustering algorithm comparision in `sklearn`:
+		- http://hdbscan.readthedocs.io/en/latest/comparing_clustering_algorithms.html
+		- http://scikit-learn.org/stable/modules/clustering.html
+	- 

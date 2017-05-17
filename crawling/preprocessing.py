@@ -1,5 +1,6 @@
 import json
 import re
+import unicodedata
 
 emoticons_str = r"""
     (?:
@@ -31,13 +32,15 @@ def tokenize(s):
 
 def preprocess(s, lowercase=False):
 	tokens = tokenize(s)
+	print(tokens)
 	if lowercase:
 		tokens = [token if emoticon_re.search(token) else token.lower() for token in tokens]
 	return tokens
 
 if __name__ == '__main__':
-	with open('data/stream_jogja.json', 'r') as f:
+	with open('../data/stream_jogja.json', 'r') as f:
 		for line in f:
 			tweet = json.loads(line)
-			# tokens = preprocess(str(tweet['text']))
-			print(tweet['text'])
+			tweet_ascii = unicodedata.normalize('NFKD', tweet['text']).encode('ascii', 'ignore')
+			tokens = preprocess(tweet_ascii)
+			# print(tokens)
