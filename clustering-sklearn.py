@@ -131,8 +131,8 @@ print("done in %fs" % (time() - t0))
 print("n_samples: %d, n_features: %d" % X.shape)
 print()
 
-# if opts.n_components:
-if True:
+if opts.n_components:
+# if True:
 	print("Performing dimensionality reduction using LSA")
 	t0 = time()
 	# Vectorizer results are normalized, which makes KMeans behave as

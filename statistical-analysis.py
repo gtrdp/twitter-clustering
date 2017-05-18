@@ -56,7 +56,7 @@ stopwords_english = nltk.corpus.stopwords.words('english')
 with open("stopword_list_tala.txt", "r") as f:
 	stopwords_indonesian = f.read().splitlines()
 
-cv = CountVectorizer(min_df=0, stop_words=stopwords_english + stopwords_indonesian, max_features=500)
+cv = CountVectorizer(min_df=0, stop_words=stopwords_english + stopwords_indonesian, max_features=500, ngram_range=(2,3))
 counts = cv.fit_transform(texts)
 words = np.array(cv.get_feature_names())
 # normalize

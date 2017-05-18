@@ -11,13 +11,21 @@ Algorithm Check List
 | Statistical Analysis | Done | Visualization is not yet done. |
 | Ward hierarchical clustering  |         |           |
 | DBSCAN |        |           |
+| Latent Dirichlet Allocation |        |           |
+| Non-negative Matrix Factorization |        |           |
 
+Vectorizer:
+
+- Hashingvectorizer
+- TFIDF
 
 Parameters:
 
 - TF-IDF n-gram: 2-gram, 3-gram, etc.
 - Using DBI and Silhouette
 - Jaccard and cosine similarity
+- Word (or n-gram) frequencies are typical units of analysis when working with text collections.
+- Use PCA with different dimension, plot the result.
 
 **To-Do**
 
@@ -104,4 +112,19 @@ May #3
 	- Clustering algorithm comparision in `sklearn`:
 		- http://hdbscan.readthedocs.io/en/latest/comparing_clustering_algorithms.html
 		- http://scikit-learn.org/stable/modules/clustering.html
-	- 
+	- Word (or n-gram) frequencies are typical units of analysis when working with text collections.
+	- https://de.dariah.eu/tatom/working_with_text.html
+	- LSA in Python: http://mccormickml.com/2015/08/06/document-clustering-example-in-scikit-learn/
+	- https://www.quora.com/What-is-most-used-algorithm-for-text-documents-clustering
+	- https://github.com/arnab64/textclusteringDBSCAN
+	- http://blog.echen.me/2011/08/22/introduction-to-latent-dirichlet-allocation/
+
+- **Thu May 18 07:01:05 WIB 2017**
+	- Use PCA with different dimension, plot the result.
+	- Topic extraction:
+		- Non-negative Matrix Factorization
+		- Latent Dirichlet Allocation
+	- DBSCAN does not work in high dimensional space
+		- https://www.quora.com/Why-DBSCAN-clustering-will-not-work-in-high-dimensional-space
+	- https://www.researchgate.net/post/What_is_the_best_distance_measure_for_high_dimensional_data
+	- https://en.wikipedia.org/wiki/Clustering_high-dimensional_data
