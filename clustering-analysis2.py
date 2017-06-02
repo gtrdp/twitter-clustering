@@ -26,88 +26,24 @@ import csv
 import unicodedata
 import json
 from sklearn.datasets import fetch_20newsgroups
+from sklearn.cluster import DBSCAN
+import numpy as np
 
-def cluster(num_clusters):
-	# === k-means clustering
-	print("clustering with N=%d" % num_clusters)
-	km = KMeans(n_clusters=num_clusters, random_state=10)
-	# km.fit(tfidf_matrix)
-	km.fit(reduced_data)
-	clusters = km.labels_.tolist()
+def cluster(epsilon, minsample):
+	db = DBSCAN(eps=epsilon_value[epsilon], min_samples=minsample).fit(reduced_data)
+	core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
+	core_samples_mask[db.core_sample_indices_] = True
+	labels = db.labels_
 
-	# store the clustering result
-	# joblib.dump(km,  'doc_cluster.pkl')
-	# load the clustering result
-	# km = joblib.load('doc_cluster.pkl')
-	# clusters = km.labels_.tolist()
+	# Number of clusters in labels, ignoring noise if present.
+	n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
 
-
-	# creating data frame to store the files
-	# tweets = {'user': users, 'text': texts, 'cluster': clusters}
-	# clustered_data = pd.DataFrame(tweets, index = [clusters] , columns = ['user', 'text', 'cluster'])
-	# print(clustered_data['cluster'].value_counts())
-
-	# if num_clusters == 3:
-	# 	# plotting the result
-	# 	print("plotting the result to scatter plot")
-	# 	for index, val in enumerate(clusters):
-	# 		if val == 0:
-	# 			c1 = plt.scatter(reduced_data[index, 0], reduced_data[index, 1], c='r', marker='+')
-	# 		elif val == 1:
-	# 			c2 = plt.scatter(reduced_data[index, 0], reduced_data[index, 1], c='g', marker='o')
-	# 		elif val == 2:
-	# 			c3 = plt.scatter(reduced_data[index, 0], reduced_data[index, 1], c='b', marker='*')
-	#
-	# 	plt.show()
-
-
-	# # finding the top n words of each cluster
-	# print("Top terms per cluster:")
-	# print()
-	# # sort cluster centers by proximity to centroid
-	# order_centroids = km.cluster_centers_.argsort()[:, ::-1]
-	#
-	# cluster_names = {}
-	#
-	# for i in range(num_clusters):
-	# 	print("Cluster %d words:" % i)
-	#
-	# 	foo = ''
-	# 	for ind in order_centroids[i, :10]:
-	# 		# print(' %s' % vocab_frame.ix[terms[ind].split(' ')].values.tolist()[0][0].encode('utf-8', 'ignore'), end=',')
-	# 		print(' %s' % terms[ind], end=',')
-	# 		foo = foo + terms[ind] + ', '
-	# 	print()  # add whitespace
-	# 	print()  # add whitespace
-	# 	cluster_names[i] = foo
-	#
-	# 	# print("Cluster %d titles:" % i, end='')
-	# 	# for title in clustered_data.ix[i]['text'].values.tolist():
-	# 	# 	print(' %s,' % title, end='')
-	# 	# print()  # add whitespace
-	# 	# print()  # add whitespace
-
-	silhouette_avg = silhouette_score(reduced_data, clusters)
-	# silhouette_avg = silhouette_score(tfidf_matrix, clusters)
-	print("For n_clusters =", num_clusters,
-		  "The average silhouette_score is :", silhouette_avg)
-	silhouette_index.append(silhouette_avg)
+	print("epsilon:", epsilon_value[epsilon],"min sample:",minsample)
+	print('Estimated number of clusters: %d' % n_clusters_)
+	# print("Silhouette Coefficient: %0.3f"
+	# 	  % silhouette_score(reduced_data, labels))
+	# silhouette_avg = silhouette_score(reduced_data, labels)
 	print()
-	print()
-
-	if num_clusters == 14:
-		print("Save the result to csv file")
-		# convert unicode to ascii
-		for idx, val in enumerate(texts):
-			if isinstance(val, unicode):
-				texts[idx] = unicodedata.normalize('NFKD', val).encode('ascii', 'ignore')
-
-		my_dict = {"cluster": clusters, "text": texts}
-
-		with open('mycsvfile_'+str(num_clusters)+'.csv', 'wb') as f:  # Just use 'w' mode in 3.x
-			writer = csv.writer(f)
-			writer.writerow(my_dict.keys())
-			writer.writerows(zip(*my_dict.values()))
 
 if __name__ == "__main__":
 	# read the data, preprocessing involves:
@@ -191,25 +127,29 @@ if __name__ == "__main__":
 
 	# doing PCA
 	print("performing PCA...")
-	reduced_data = PCA(n_components=3).fit_transform(tfidf_matrix.toarray())
+	reduced_data = PCA(n_components=10).fit_transform(tfidf_matrix.toarray())
 	# # draw the plot
 	# plt.scatter(reduced_data[:,0], reduced_data[:,1])
 	# plt.show()
 
 
 	print("beginning clustering...")
-	n_clusters = range(2,30)
+	epsilon_value = range(5,10)
+	epsilon = range(0,5)
+	minsample = range(4,10)
 	silhouette_index = []
-	for foo in n_clusters:
-		cluster(foo)
 
-	# draw the plot
-	print("max:",n_clusters[silhouette_index.index(max(silhouette_index))],"(",max(silhouette_index),")")
-	print(len(n_clusters), len(silhouette_index))
-	plt.plot(n_clusters, silhouette_index, 'ro', linestyle="-", color='b')
-	# plt.axis([0, 6, 0, 20])
-	plt.xlabel('n cluster')
-	plt.ylabel('Silhouette')
-	plt.title('Silhouette index on Tempo.co dataset; 3 dimensions')
-	# plt.title('Silhouette index on Twitter dataset (with sentiment)')
-	plt.show()
+	for foo in epsilon:
+		for bar in minsample:
+			cluster(foo, bar)
+
+	# # draw the plot
+	# print("max:",n_clusters[silhouette_index.index(max(silhouette_index))],"(",max(silhouette_index),")")
+	# print(len(n_clusters), len(silhouette_index))
+	# plt.plot(n_clusters, silhouette_index, 'ro', linestyle="-", color='b')
+	# # plt.axis([0, 6, 0, 20])
+	# plt.xlabel('n cluster')
+	# plt.ylabel('Silhouette')
+	# plt.title('Silhouette index on Tempo.co dataset; 3 dimensions')
+	# # plt.title('Silhouette index on Twitter dataset (with sentiment)')
+	# plt.show()

@@ -11,7 +11,7 @@ Algorithm Check List
 | Statistical Analysis | Done | Visualization is not yet done. |
 | Ward hierarchical clustering  |         |           |
 | DBSCAN |        |           |
-| Latent Dirichlet Allocation |        |           |
+| Latent Dirichlet Allocation | Done |           |
 | Non-negative Matrix Factorization |        |           |
 
 Vectorizer:
@@ -128,3 +128,123 @@ May #3
 		- https://www.quora.com/Why-DBSCAN-clustering-will-not-work-in-high-dimensional-space
 	- https://www.researchgate.net/post/What_is_the_best_distance_measure_for_high_dimensional_data
 	- https://en.wikipedia.org/wiki/Clustering_high-dimensional_data
+
+- **Fri May 19 14:57:23 WIB 2017**
+	- Test the algorithm using known datasets.
+
+May #4
+------
+- **Mon May 22 12:43:14 WIB 2017**
+	- Try using labeled data.
+	- Got a visit from Mas Kuntoro, Mas Canggih, and Putra.
+	
+- **Tue May 23 17:28:00 WIB 2017**
+	- https://en.wikipedia.org/wiki/Clustering_high-dimensional_data
+	- Result from labeled dataset:
+
+	```
+	reading the files, stemming, and stopwords removal
+	3387 documents
+	
+	TFIDF Vectorizer
+	(3387, 10000)
+	beginning clustering...
+	clustering with N=4
+	Top terms per cluster:
+	
+	Cluster 0 words:
+	 sandvik, kent, apple, newton, com, alink, ksand, cookamunga, tourist, bureau,
+	
+	Cluster 1 words:
+	 god, com, one, people, keith, would, say, article, jesus, sgi,
+	
+	Cluster 2 words:
+	 graphics, com, university, posting, image, host, thanks, nntp, computer, would,
+	
+	Cluster 3 words:
+	 space, nasa, henry, access, digex, toronto, gov, pat, would, alaska,
+	```
+
+	- Labeled dataset using sklearn implementation:
+
+	```
+	Loading 20 newsgroups dataset for categories:
+	['alt.atheism', 'talk.religion.misc', 'comp.graphics', 'sci.space']
+	3387 documents
+	4 categories
+	
+	Extracting features from the training dataset using TF-IDF
+	done in 1.322455s
+	n_samples: 3387, n_features: 10000
+	
+	Clustering sparse data with KMeans(algorithm='auto', copy_x=True, init='k-means++', max_iter=100,
+	    n_clusters=4, n_init=1, n_jobs=1, precompute_distances='auto',
+	    random_state=None, tol=0.0001, verbose=False)
+	done in 4.049s
+	
+	Homogeneity: 0.379
+	Completeness: 0.559
+	V-measure: 0.452
+	Adjusted Rand-Index: 0.358
+	Silhouette Coefficient: 0.005
+	
+	Top terms per cluster:
+	Cluster 0: ___ jpl nasa gov baalke __ kelvin command ron egalon
+	Cluster 1: sgi keith livesey objective morality caltech wpd solntze jon moral
+	Cluster 2: space com graphics university posting host nntp access like henry
+	Cluster 3: god com sandvik people jesus don article bible christian religion
+	```
+	
+- **Wed May 24 08:38:59 WIB 2017**
+	- Progress report preparation.
+	- Retweet?
+
+- **Thu May 25 08:38:59 WIB 2017**
+	- Ascension of Jesus Christ.
+
+- **Fri May 26 08:38:59 WIB 2017**
+	- SKK Migas.
+
+May #5
+------
+- **Mon May 29 14:52:16 WIB 2017**
+	- Short text clustering algorithm.
+	- https://github.com/rwalk/gsdmm
+- **Tue May 30 12:42:49 WIB 2017**
+	- https://radimrehurek.com/gensim/
+	- http://mccormickml.com/2016/03/25/lsa-for-text-classification-tutorial/
+	- Glancing on short text clustering algorithm.
+
+	> Existing works on classification of short text messages integrate every message with meta-information from external information sources such as Wikipedia and WordNet.
+	
+	- Found in researchgate:
+
+	> Latent Semantic Analysis works good for unknown data with any number of classes. It requires minimum information before hand.
+	
+	- Possibly good starting point for short text clustering, Word Mover Distance: http://vene.ro/blog/word-movers-distance-in-python.html
+	- Conclusion:
+		- GDSMM (https://github.com/rwalk/gsdmm)
+		- Word Mover Distance
+		- Combination with other text source, eg., wikipedia, etc.
+
+- **Rab Mei 31 10:54:48 WIB 2017**
+	- Short text datasets:
+		- http://davis.wpi.edu/xmdv/datasets/ohsumed.html
+		- http://cogcomp.cs.illinois.edu/Data/QA/QC/
+		- https://drive.google.com/drive/u/0/folders/0Bz8a_Dbh9Qhbfll6bVpmNUtUcFdjYmF2SEpmZUZUcVNiMUw1TWN6RDV3a0JHT3kxLVhVR2M
+		- https://github.com/jacoxu/StackOverflow
+		- http://acube.di.unipi.it/datasets/
+	- https://www.researchgate.net/post/What_is_a_good_way_to_perform_topic_modeling_on_short_text
+	
+		> Topic modelling on Twitter has been analysed in various publications. Despite the short and sparse texts LDA (Latent Dirichlet Allocation)has proven to work good on tweets [1]. We could confirm the observations made in this paper, when applying LDA ourself to large twitter corpora. One particularity in this context is that tweets are very focussed and hardly ever discuss more than 1 or 2 topics identified by LDA.
+	
+		> If you want to stay with TF-IDF or its variations, you must not use length normalization techniques. We found that length normalization for such short texts are not only unmotivated but eve counterproductive [2].
+	
+		> [1] J. Weng, E.-P. Lim, J. Jiang, and Q. He. TwitterRank: Finding topic-sensitive influential twitterers. In Proc. Int. Conf. on Web Search and Data Mining, pages 261–270, 2010.
+	
+		> [2] Naveed, N., Gottron, T., Kunegis, J., Che Alhadi, A.: Searching microblogs: Coping with sparsity and document quality. In: CIKM’11: Proceedings of 20th ACM Conference on Information and Knowledge Management. pp. 183–188 (2011) 
+
+- **Thu Jun  1 10:16:46 WIB 2017**
+	- The birth of Indonesian Five Pillars.
+- **Fri Jun  2 10:16:46 WIB 2017**
+	- 
