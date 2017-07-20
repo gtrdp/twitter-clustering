@@ -247,4 +247,6 @@ May #5
 - **Thu Jun  1 10:16:46 WIB 2017**
 	- The birth of Indonesian Five Pillars.
 - **Fri Jun  2 10:16:46 WIB 2017**
-	- 
+	- Text Stemmer:
+		- http://blog.pantaw.com/syntatic-proses-text-stemmer-bahasa-indonesia-dengan-python/
+		- https://github.com/har07/PySastrawi
