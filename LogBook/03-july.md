@@ -91,4 +91,30 @@ July #3
 	- Forbil's Proposal Done.
 - **Thu Jul 20 12:17:45 WIB 2017**
 	- Big Data Meeting.
-	- 
+- **Fri Jul 21 13:30:12 WIB 2017**
+	- Intelligent System Meeting.
+		- Hibah research grant.
+
+July #4
+-------
+- **Mon Jul 24 16:02:53 WIB 2017**
+	- SKK Migas.
+- **Tue Jul 25 16:02:53 WIB 2017**
+	- Away (jakarta).
+- **Wed Jul 26 16:02:53 WIB 2017**
+	- Away (jakarta).
+- **Thu Jul 27 16:02:53 WIB 2017**
+	- Finishing forbil's proposal.
+	- Bookmark for short text clustering:
+		- https://github.com/jacoxu/StackOverflow
+		- https://opendata.stackexchange.com/questions/6080/data-sets-for-short-text-classification
+		- http://acube.di.unipi.it/tagme-dataset/
+		- http://acube.di.unipi.it/tmn-dataset/
+		- https://github.com/lintool/twitter-tools/wiki/Tweets2011-Collection
+		- http://trec.nist.gov/data.html
+		- https://scholar.google.com/scholar?q=short+text+classification+dataset&hl=en&as_sdt=0&as_vis=1&oi=scholart&sa=X&ved=0ahUKEwiCgpCbkJfVAhWJxbwKHTYzB4EQgQMIHzAA
+		- https://etd.ohiolink.edu/!etd.send_file?accession=osu1275406094&disposition=inline
+		- http://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification.pdf
+		- https://github.com/niderhoff/nlp-datasets
+		- https://archive.ics.uci.edu/ml/datasets.html?format=&task=&att=&area=&numAtt=&numIns=&type=text&sort=nameUp&view=table
+
