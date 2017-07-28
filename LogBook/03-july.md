@@ -117,4 +117,10 @@ July #4
 		- http://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification.pdf
 		- https://github.com/niderhoff/nlp-datasets
 		- https://archive.ics.uci.edu/ml/datasets.html?format=&task=&att=&area=&numAtt=&numIns=&type=text&sort=nameUp&view=table
-
+- **Fri Jul 28 13:56:25 WIB 2017**
+	- Working on short text clustering.
+	- Some bookmarks on clustering in Spark:
+		- https://databricks.com/blog/2015/03/25/topic-modeling-with-lda-mllib-meets-graphx.html
+		- https://spark.apache.org/docs/latest/mllib-clustering.html
+		- https://jaceklaskowski.gitbooks.io/mastering-apache-spark/spark-mllib/spark-mllib-pipelines-example-classification.html
+		- http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6778764
