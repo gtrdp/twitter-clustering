@@ -123,4 +123,20 @@ July #4
 		- https://databricks.com/blog/2015/03/25/topic-modeling-with-lda-mllib-meets-graphx.html
 		- https://spark.apache.org/docs/latest/mllib-clustering.html
 		- https://jaceklaskowski.gitbooks.io/mastering-apache-spark/spark-mllib/spark-mllib-pipelines-example-classification.html
-		- http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6778764
+		- http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6778764
+
+	> Earlier sections dealt with classification of text messages. By “text”, we referred to documents housing the text. These documents are typically large and are rich with content. Traditional techniques like Bag-Of-Words work well with such data sets since the word occurrence is high and though the order is lost, word frequency is enough to capture the semantics of the document. Alternate approaches like TF-IDF help to counter some loop holes in the Bag-Of-Words approach by weighing the terms.	> However, when dealing with shorter text messages, traditional techniques will not perform as well as they would have performed on larger texts. This matches our intuition since these techniques rely on word frequency. Since the word occurrence is too small, they offer no sufficient knowledge about the text itself.
+
+	- Sklearn integration with spark:
+		- https://github.com/databricks/spark-sklearn
+		- https://databricks.com/blog/2016/02/08/auto-scaling-scikit-learn-with-apache-spark.html
+	- Twitter clustering in python
+		- https://github.com/JamesPHoughton/twitter-cluster
+	- Difference between topic modeling and text clustering
+		- https://iksinc.wordpress.com/2016/05/16/topic-modeling-and-document-clustering-whats-the-difference/
+	- Nice article about clustering and LDA in spark:
+		- https://blog.knoldus.com/2016/10/08/spark-lda-clustering/
+	- How LDA works:
+		- https://algobeans.com/2015/06/21/laymans-explanation-of-topic-modeling-with-lda-2/
+		- http://blog.echen.me/2011/08/22/introduction-to-latent-dirichlet-allocation/
+		- https://www.quora.com/Why-does-LDA-work
