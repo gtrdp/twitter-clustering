@@ -6,6 +6,9 @@
 # It will produce the list of tweets for the query "apple"
 # in the file data/stream_apple.json
 
+# example:
+# python twitter-crawl.py -d data -q transjakarta -q busway -q trans -q "bus way" -q "trans jakarta"
+
 import tweepy
 from tweepy import Stream
 from tweepy import OAuthHandler
@@ -36,13 +39,14 @@ class MyListener(StreamListener):
 
 	def __init__(self, data_dir, query):
 		query_fname = format_filename(query)
-		self.outfile = "%s/stream_%s.json" % (data_dir, query_fname)
+		time_now = time.strftime("%Y-%m-%d_%H.%M.%S")
+		self.outfile = "%s/stream_%s_%s.json" % (data_dir, query_fname, time_now)
 
 	def on_data(self, data):
 		try:
 			with open(self.outfile, 'a') as f:
 				f.write(data)
-				print(data)
+				# print(data)
 				return True
 		except BaseException as e:
 			print("Error on_data: %s" % str(e))
@@ -91,8 +95,9 @@ if __name__ == '__main__':
 	api = tweepy.API(auth)
 
 	twitter_stream = Stream(auth, MyListener(args.data_dir, args.query))
-	# twitter_stream.filter(track=[args.query]) # filter by query
-	JOGJA = [109.4763, -8.4557, 111.3928, -7.2811] # jogja geobox
-	twitter_stream.filter(locations=JOGJA) # filter by location
 
-	format
+	twitter_stream.filter(track=[args.query]) # filter by query
+	# JOGJA = [109.4763, -8.4557, 111.3928, -7.2811] # jogja geobox
+
+	JAKARTA = [106.666946,-6.3774,107.002029,-6.085253] # jakarta boundingbox
+	twitter_stream.filter(locations=JAKARTA) # filter by location
