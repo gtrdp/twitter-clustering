@@ -38,7 +38,7 @@ def preprocess(s, lowercase=False):
 	return tokens
 
 if __name__ == '__main__':
-	with open('data/stream_transjakarta_2017-08-18.json', 'r') as f:
+	with open('data/stream_2017-08-21_14.35.19.json', 'r') as f:
 		for line in f:
 			tweet = json.loads(line)
 			tweet_ascii = unicodedata.normalize('NFKD', tweet['text']).encode('ascii', 'ignore')

@@ -8,6 +8,7 @@
 
 # example:
 # python twitter-crawl.py -d data -q transjakarta -q busway -q trans -q "bus way" -q "trans jakarta"
+# python twitter-crawl.py -d data -q transjakarta "trans jakarta" "bus way" "busway"
 
 import tweepy
 from tweepy import Stream
@@ -22,15 +23,16 @@ import json
 def get_parser():
 	"""Get parser for command line arguments."""
 	parser = argparse.ArgumentParser(description="Twitter Downloader")
+	parser.add_argument("-d",
+						"--data-dir",
+						dest="data_dir",
+						default="data")
 	parser.add_argument("-q",
 						"--query",
 						dest="query",
 						help="Query/Filter",
-						default='-')
-	parser.add_argument("-d",
-						"--data-dir",
-						dest="data_dir",
-						help="Output/Data Directory")
+						default='-',
+						nargs = "*")
 	return parser
 
 
@@ -38,15 +40,15 @@ class MyListener(StreamListener):
 	"""Custom StreamListener for streaming data."""
 
 	def __init__(self, data_dir, query):
-		query_fname = format_filename(query)
+		# query_fname = format_filename(query)
 		time_now = time.strftime("%Y-%m-%d_%H.%M.%S")
-		self.outfile = "%s/stream_%s_%s.json" % (data_dir, query_fname, time_now)
+		self.outfile = "%s/stream_%s.json" % (data_dir, time_now)
 
 	def on_data(self, data):
 		try:
 			with open(self.outfile, 'a') as f:
 				f.write(data)
-				# print(data)
+				print(data)
 				return True
 		except BaseException as e:
 			print("Error on_data: %s" % str(e))
@@ -96,8 +98,9 @@ if __name__ == '__main__':
 
 	twitter_stream = Stream(auth, MyListener(args.data_dir, args.query))
 
-	twitter_stream.filter(track=[args.query]) # filter by query
-	# JOGJA = [109.4763, -8.4557, 111.3928, -7.2811] # jogja geobox
+	twitter_stream.filter(track=args.query) # filter by query
 
-	JAKARTA = [106.666946,-6.3774,107.002029,-6.085253] # jakarta boundingbox
-	twitter_stream.filter(locations=JAKARTA) # filter by location
+	# location filter
+	# JOGJA = [109.4763, -8.4557, 111.3928, -7.2811] # jogja geobox
+	# JAKARTA = [106.666946,-6.3774,107.002029,-6.085253] # jakarta boundingbox
+	# twitter_stream.filter(locations=JAKARTA) # filter by location

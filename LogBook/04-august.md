@@ -68,3 +68,17 @@ August #3
 	- Indonesian Independence Day.
 - **Fri Aug 18 09:11:09 WIB 2017**
 	- Meeting Yuk app.
+
+August #4
+---------
+- **Mon Aug 21 14:00:10 WIB 2017**
+	- Creating cronjobs for data acquisition.
+- **Wed Aug 23 14:01:12 WIB 2017**
+	- Meet Pak Widyawan, some insights:
+		- http://www.trackur.com
+		- http://www.ebdesk.com
+		- http://keyhole.co -> very nice for visualization
+		- https://gephi.org
+		- https://nodexl.codeplex.com
+- **Wed Aug 23 14:01:12 WIB 2017**
+	- Work together for thursday's jakarta demo.
