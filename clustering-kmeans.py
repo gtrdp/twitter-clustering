@@ -25,22 +25,29 @@ import feedparser
 # - removing URLS, special characters
 # - all to small letters
 # read from precrawled twitter tweets
-# raw_data = pd.read_csv('data.csv')
-# # replace URL
-# raw_data = raw_data.replace(['http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', "&amp;", "\[pic\]"], ['','',''], regex=True)
-# users_long = raw_data['user'].tolist()
-# texts_long = [x.lower() for x in raw_data['text'].tolist()]
+raw_data = pd.read_csv('hanura.csv')
+# replace URL
+raw_data = raw_data.replace(['http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', "&amp;", "\[pic\]"], ['','',''], regex=True)
+users_long = raw_data['User'].tolist()
+texts_long = [x.lower() for x in raw_data['Text'].tolist()]
 # users = users_long[:2000]
 # texts = texts_long[:2000]
+users = users_long
+texts = texts_long
 
-# read from tempo.co rss
-tempo_data = feedparser.parse('tempo.xml')
 
-users = []
-texts = []
-for value in tempo_data['entries']:
-	users.append(value['title'])
-	texts.append(value['summary'])
+
+
+# # read from tempo.co rss
+# tempo_data = feedparser.parse('tempo.xml')
+#
+# users = []
+# texts = []
+# for value in tempo_data['entries']:
+# 	users.append(value['title'])
+# 	texts.append(value['summary'])
+
+
 
 # Stopwords, stemming, and tokenizing
 stopwords_english = nltk.corpus.stopwords.words('english')
@@ -128,7 +135,7 @@ for i in range(num_clusters):
 	print("Cluster %d words:" % i)
 
 	foo = ''
-	for ind in order_centroids[i, :7]:
+	for ind in order_centroids[i, :5]:
 		# print(' %s' % vocab_frame.ix[terms[ind].split(' ')].values.tolist()[0][0].encode('utf-8', 'ignore'), end=',')
 		print(' %s' % terms[ind], end=',')
 		foo = foo + terms[ind] + ', '
@@ -198,7 +205,7 @@ class TopToolbar(mpld3.plugins.PluginBase):
 
 
 # create data frame that has the result of the MDS plus the cluster numbers and titles
-df = pd.DataFrame(dict(x=xs, y=ys, label=clusters, tweet=users))
+df = pd.DataFrame(dict(x=xs, y=ys, label=clusters, tweet=texts))
 
 # group by cluster
 groups = df.groupby('label')
@@ -246,5 +253,5 @@ mpld3.display()  # show the plot
 # uncomment the below to export to html
 html = mpld3.fig_to_html(fig)
 # print(html)
-with open("result.html", "w") as html_file:
+with open("hanura.html", "w") as html_file:
 	html_file.write(html)

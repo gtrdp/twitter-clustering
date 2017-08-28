@@ -81,4 +81,28 @@ August #4
 		- https://gephi.org
 		- https://nodexl.codeplex.com
 - **Wed Aug 23 14:01:12 WIB 2017**
-	- Work together for thursday's jakarta demo.
+	- Work together for thursday's jakarta demo (Hanura OSO).
+- **Thu Aug 24 10:46:20 WIB 2017**
+	- Save location (text) as text cloud or rank.
+	- Got this error:
+
+```
+requests.exceptions.SSLError: HTTPSConnectionPool(host='stream.twitter.com', port=443): Max retries exceeded with url: /1.1/statuses/filter.json?delimited=length (Caused by SSLError(SSLError(1, u'[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:765)'),))
+```
+- **Fri Aug 25 18:20:29 WIB 2017**
+	- an example of Twitter's JSON
+		- https://gist.github.com/hrp/900964
+		- https://twitter.com/statuses/ID to retrieve original tweet
+	- Twitter's enterprise API
+		- https://gnip.com
+	- LDA in Spark
+		- https://github.com/apache/spark/blob/master/examples/src/main/python/mllib/latent_dirichlet_allocation_example.py
+
+August #5
+---------
+- **Mon Aug 28 22:19:00 WIB 2017**
+	- Starting cronjobs to crawl the data.
+	- Working on the saracen JSON.
+		- It turns out that it does not contain duplicated data.
+		- It contains 10082 lines of unique tweed id.
+		- Apparently, it contains lots of retweets as it only contains of unique 3505 lines of tweet text.
