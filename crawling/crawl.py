@@ -50,5 +50,9 @@ class CustomStreamListener(tweepy.StreamListener):
         print >> sys.stderr, 'Timeout...'
         return True # Don't kill the stream
 
-sapi = tweepy.streaming.Stream(auth, CustomStreamListener('twitter-data'))
-sapi.filter(track=["transjakarta", "trans jakarta", "bus way", "busway"], languages=["in"])
+# run the code with try to handle the exception
+try:
+    sapi = tweepy.streaming.Stream(auth, CustomStreamListener('twitter-data'))
+    sapi.filter(track=["transjakarta", "trans jakarta", "bus way", "busway"], languages=["in"])
+except:
+    pass

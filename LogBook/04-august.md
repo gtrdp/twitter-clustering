@@ -106,3 +106,9 @@ August #5
 		- It turns out that it does not contain duplicated data.
 		- It contains 10082 lines of unique tweed id.
 		- Apparently, it contains lots of retweets as it only contains of unique 3505 lines of tweet text.
+- **Tue Aug 29 09:21:41 WIB 2017**
+	- Try to run multiple data collection streamer.
+	- Crontab formula is now working, but be aware of (possible) duplicated id.
+	- Double crawlers (indonesian and general) are now running.
+- **Wed Aug 30 11:18:34 WIB 2017**
+	- Figure out how to handle exceptions and keep the program up and running.
