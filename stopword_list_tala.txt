@@ -269,6 +269,7 @@ inilah
 itu
 itukah
 itulah
+iya
 jadi
 jadilah
 jadinya
@@ -760,3 +761,5 @@ others
 yg
 ya
 rt
+nya
+min
